@@ -1,0 +1,25 @@
+======================================================================
+INFORMACIÓN IMPORTANTE - Detector de Objetos con Haar Cascades
+
+¡Gracias por elegir Detector de Objetos con Haar Cascades!
+
+Antes de continuar con la instalación, por favor, ten en cuenta lo siguiente:
+
+¿QUÉ HACE ESTA APLICACIÓN?
+Esta es una herramienta de escritorio que te permite detectar objetos, como rostros, ojos y sonrisas, tanto en imágenes guardadas en tu equipo como en tiempo real a través de tu cámara web.
+
+ACCESO A LA CÁMARA WEB
+Para la función de "Modo Cámara en Vivo", la aplicación solicitará acceso a la cámara web conectada a tu computadora. Asegúrate de que no esté siendo utilizada por otro programa y de que los permisos del sistema operativo permitan su uso.
+
+CARPETAS ADICIONALES
+El instalador creará las siguientes carpetas dentro del directorio de la aplicación:
+
+haarcascade: Contiene los modelos de inteligencia artificial necesarios para la detección.
+
+imgPruebas: Un lugar donde puedes guardar tus propias imágenes para analizarlas.
+
+Resultados: Aquí se guardarán automáticamente las imágenes que proceses y decidas conservar.
+
+Al hacer clic en "Siguiente", aceptas estas condiciones y estás listo para comenzar.
+
+¡Disfruta de la aplicación!

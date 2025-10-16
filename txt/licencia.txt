@@ -1,0 +1,42 @@
+======================================================================
+
+LICENCIA DE SOFTWARE
+
+Resumen en español (Este resumen no es la licencia legal):
+
+Esta es una licencia de software libre (Licencia MIT). En términos sencillos, significa que:
+
+Eres libre de usar, copiar, modificar y distribuir este software para cualquier propósito, ya sea personal, educativo o comercial, de forma gratuita.
+
+Debes incluir este mismo texto de licencia en cualquier copia o parte sustancial del software que distribuyas.
+
+El software se proporciona "tal cual", sin ningún tipo de garantía. Los autores no se hacen responsables de ningún problema que pueda surgir de su uso.
+
+Atribución y Contacto
+
+Autor: Melchor Estrada José Luis
+Repositorio del Proyecto: https://github.com/josprox/detector-haarcascade
+
+Para reportar errores o realizar sugerencias, por favor, utiliza la sección de "Issues" en el repositorio de GitHub o contacta al autor a través del siguiente correo electrónico: joss@int.josprox.com
+
+Texto legal completo de la Licencia MIT (The MIT License):
+
+Copyright (c) 2025 Melchor Estrada José Luis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

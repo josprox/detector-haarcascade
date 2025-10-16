@@ -47,3 +47,5 @@ Resultados/
 # Descomenta la siguiente línea si tienes un archivo de configuración local
 # que no deba subirse, como un 'config.ini' con claves de API.
 # config.ini
+
+*.exe
