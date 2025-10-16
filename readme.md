@@ -115,10 +115,11 @@ cd .. # Regresa a la raíz del proyecto
 Asegúrate de que tu proyecto tenga la siguiente estructura de carpetas en su raíz:
 
 ```
-/REC_FAC
-|-- /haarcascade/           <-- Aquí van los archivos .xml
-|-- /imgPruebas/            <-- Coloca aquí tus imágenes de prueba
-|-- /Resultados/            <-- Se creará automáticamente para guardar las imágenes
+/DetectorHaar
+|-- /haarcascade/          <-- Aquí van los archivos .xml
+|-- /imgPruebas/           <-- Coloca aquí tus imágenes de prueba
+|-- /img/                  <-- Coloca aquí tu logo.ico y logo.png
+|-- /Resultados/           <-- Se creará automáticamente para guardar las imágenes
 |-- main.py
 |-- model.py
 |-- view.py
@@ -137,3 +138,38 @@ python main.py
 ```
 
 Se abrirá la ventana de la aplicación, ¡y ya está lista para usarse\!
+
+-----
+
+## 📦 Compilación para Distribución
+
+Para convertir tu aplicación en un archivo ejecutable (`.exe`) que se pueda ejecutar en otras máquinas Windows sin necesidad de instalar Python o las librerías, puedes usar **PyInstaller**.
+
+### 1\. Instalar PyInstaller
+
+Si no lo tienes, instálalo a través de pip:
+
+```bash
+pip install pyinstaller
+```
+
+### 2\. Preparar el Ícono (Opcional)
+
+El comando de compilación busca un archivo `logo.ico` en la carpeta `img`. Si tienes un logo en formato `.png`, necesitarás convertirlo a `.ico`. Puedes usar un convertidor en línea gratuito para esta tarea.
+
+### 3\. Generar el Ejecutable
+
+Abre una terminal en la raíz de tu proyecto (donde se encuentra `main.py`) y ejecuta el siguiente comando:
+
+```bash
+pyinstaller --name="DetectorHaar" --windowed --icon="img/logo.ico" --add-data="haarcascade;haarcascade" --add-data="imgPruebas;imgPruebas" main.py
+```
+
+  * `--name`: Establece el nombre del ejecutable.
+  * `--windowed`: Evita que se abra una consola de comandos al ejecutar la aplicación.
+  * `--icon`: Asigna el ícono a tu ejecutable.
+  * `--add-data`: Es **crucial** para empaquetar las carpetas `haarcascade` y `imgPruebas` junto con la aplicación.
+
+### 4\. Encontrar la Aplicación
+
+PyInstaller creará una carpeta llamada `dist` en la raíz de tu proyecto. Dentro de ella, encontrarás una carpeta llamada `DetectorHaar` que contiene el archivo `DetectorHaar.exe` y todas las dependencias necesarias. ¡Esa carpeta es tu aplicación distribuible\!

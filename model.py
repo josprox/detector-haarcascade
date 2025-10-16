@@ -1,18 +1,23 @@
 # model.py
 import os
-import sys # <--- IMPORTANTE: Se importa el módulo sys
+import sys 
 import cv2
 import numpy as np
 from PySide6.QtCore import QObject, Signal, QTimer
 
-# --- Resolución dinámica de rutas para PyInstaller ---
-# Esta es la lógica clave para que funcione tanto en modo script como en .exe
+# --- Resolución dinámica de rutas para PyInstaller (Solución Universal) ---
 if getattr(sys, 'frozen', False):
-    # Si la aplicación está "congelada" (ejecutable), la ruta base es la carpeta temporal creada por PyInstaller
-    base_path = sys._MEIPASS
+    # Si la aplicación está "congelada" por PyInstaller
+    if hasattr(sys, '_MEIPASS'):
+        # Modo --onefile: los datos están en una carpeta temporal
+        base_path = sys._MEIPASS
+    else:
+        # Modo de carpeta: los datos están junto al ejecutable
+        base_path = os.path.dirname(sys.executable)
 else:
-    # Si se ejecuta como un script normal, la ruta base es el directorio del propio script
+    # Si se ejecuta como un script normal .py
     base_path = os.path.dirname(os.path.abspath(__file__))
+
 
 # --- Constantes con rutas dinámicas ---
 HAARCASCADE_DIR = os.path.join(base_path, 'haarcascade')
@@ -56,6 +61,8 @@ class DetectionModel(QObject):
         try:
             return [f for f in os.listdir(HAARCASCADE_DIR) if f.endswith('.xml')]
         except FileNotFoundError:
+            # Añadimos un print para depuración
+            print(f"Error: No se encontró el directorio de cascadas en: {HAARCASCADE_DIR}")
             return []
 
     def get_available_images(self):
@@ -63,6 +70,8 @@ class DetectionModel(QObject):
         try:
             return [f for f in os.listdir(IMAGES_DIR) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
         except FileNotFoundError:
+            # Añadimos un print para depuración
+            print(f"Error: No se encontró el directorio de imágenes en: {IMAGES_DIR}")
             return []
 
     def load_classifier(self, cascade_name):
@@ -127,3 +136,4 @@ class DetectionModel(QObject):
             cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 125), 2)
             
         return image, detections
+
