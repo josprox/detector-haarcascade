@@ -7,7 +7,6 @@ from PySide6.QtCore import QObject, Signal, QTimer
 # --- Constantes ---
 HAARCASCADE_DIR = 'haarcascade'
 IMAGES_DIR = 'imgPruebas'
-CAMERA_DEVICE_INDEX = 0
 
 class DetectionModel(QObject):
     """
@@ -26,6 +25,20 @@ class DetectionModel(QObject):
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self._update_frame)
+
+    def get_available_cameras(self):
+        """
+        Escanea los índices de las cámaras para encontrar las que están conectadas.
+        Devuelve una lista de índices válidos.
+        """
+        camera_indexes = []
+        # Un límite razonable para no escanear infinitamente
+        for i in range(10): 
+            cap = cv2.VideoCapture(i, cv2.CAP_MSMF)
+            if cap.isOpened():
+                camera_indexes.append(i)
+                cap.release()
+        return camera_indexes
 
     def get_available_cascades(self):
         """Devuelve una lista de archivos .xml en el directorio de cascadas."""
@@ -60,11 +73,12 @@ class DetectionModel(QObject):
         self.frame_updated.emit(processed_image)
         self.detection_completed.emit(len(detections))
 
-    def start_camera(self):
-        """Inicia la captura de video."""
+    def start_camera(self, camera_index): # Ahora recibe el índice como argumento
+        """Inicia la captura de video desde la cámara especificada."""
         if self.classifier is None: return False
         
-        self.video_capture = cv2.VideoCapture(CAMERA_DEVICE_INDEX)
+        # Usa el índice que nos pasa el controlador
+        self.video_capture = cv2.VideoCapture(camera_index, cv2.CAP_MSMF)
         if not self.video_capture.isOpened():
             self.video_capture = None
             return False

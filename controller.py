@@ -20,7 +20,8 @@ class DetectorController:
         # Poblar la UI con datos iniciales del modelo
         self.view.populate_combos(
             self.model.get_available_cascades(),
-            self.model.get_available_images()
+            self.model.get_available_images(),
+            cameras=self.model.get_available_cameras()
         )
 
     def _connect_signals(self):
@@ -51,12 +52,20 @@ class DetectorController:
         """Inicia o detiene la cámara."""
         if not self.model.is_camera_active:
             cascade_name = self.view.cascade_combo.currentText()
+            # Obtiene el índice de la cámara seleccionada del menú
+            camera_index = self.view.camera_combo.currentData()
+            
+            if camera_index is None:
+                self.view.show_message("Error", "No hay cámaras disponibles.", "critical")
+                return
+
             if self.model.load_classifier(cascade_name):
-                if self.model.start_camera():
+                # Pasa el índice de la cámara al modelo
+                if self.model.start_camera(camera_index):
                     self.view.set_camera_button_state(True)
                     self.view.set_image_mode_enabled(False)
                 else:
-                    self.view.show_message("Error", "No se pudo acceder a la cámara.", "critical")
+                    self.view.show_message("Error", f"No se pudo acceder a la Cámara {camera_index}.", "critical")
             else:
                 self.view.show_message("Error", "Seleccione un clasificador válido primero.", "warning")
         else:

@@ -51,6 +51,13 @@ class DetectorView(QMainWindow):
         line2 = QFrame(); line2.setFrameShape(QFrame.HLine)
         controls_layout.addWidget(line2)
 
+        controls_layout.addWidget(QLabel("<b>Seleccionar Cámara:</b>"))
+        self.camera_combo = QComboBox() # El nuevo menú
+        controls_layout.addWidget(self.camera_combo)
+        # -----------------------------------------------------------
+
+        self.camera_button = QPushButton("Iniciar Cámara")
+
         controls_layout.addWidget(QLabel("<b>Modo: Detección en Vivo</b>"))
         self.camera_button = QPushButton("Iniciar Cámara")
         self.camera_button.setStyleSheet("background-color: #007BFF; color: white; padding: 10px;")
@@ -81,9 +88,19 @@ class DetectorView(QMainWindow):
         self.cascade_combo.currentTextChanged.connect(self.classifier_changed.emit)
 
     # --- Métodos que el Controlador puede llamar para actualizar la UI ---
-    def populate_combos(self, cascades, images):
+    def populate_combos(self, cascades, images, cameras): # Añadir 'cameras'
         self.cascade_combo.addItems(cascades)
         self.image_combo.addItems(images)
+        
+        # Poblar el nuevo menú de cámaras
+        if not cameras:
+            self.camera_combo.addItem("No se encontraron cámaras")
+            self.camera_combo.setEnabled(False)
+            self.camera_button.setEnabled(False)
+        else:
+            for index in cameras:
+                # Guardamos el índice numérico como dato asociado al texto
+                self.camera_combo.addItem(f"Cámara {index}", index)
 
     def display_image(self, cv_image: np.ndarray):
         height, width, channel = cv_image.shape
