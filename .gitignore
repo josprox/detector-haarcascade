@@ -1,0 +1,49 @@
+# .gitignore
+
+# # Python #
+# ---------
+# Ignora los directorios de caché de Python y los archivos de bytecode compilado.
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# # Entornos Virtuales #
+# ----------------------
+# Ignora carpetas de entornos virtuales comunes.
+venv/
+env/
+.venv/
+.env/
+
+# Basado en tu captura, parece que usas nombres específicos para los entornos.
+# Esta regla ignorará cualquier carpeta que termine en ".python-..."
+*.python-*/
+
+# # Archivos de Dependencias #
+# ----------------------------
+# A menudo, las ruedas y los huevos de Python se descargan localmente.
+*.egg-info/
+dist/
+build/
+
+# # Configuración de Editores e IDEs #
+# ------------------------------------
+# Ignora los archivos de configuración de Visual Studio Code.
+.vscode/
+
+# # Archivos del Sistema Operativo #
+# ----------------------------------
+# Ignora los archivos de metadatos de macOS y Windows.
+.DS_Store
+Thumbs.db
+
+# # Archivos y Carpetas del Proyecto #
+# ------------------------------------
+# Ignora la carpeta de resultados generados por la aplicación.
+# Es buena práctica no subir los archivos generados al repositorio.
+Resultados/
+
+# Descomenta la siguiente línea si tienes un archivo de configuración local
+# que no deba subirse, como un 'config.ini' con claves de API.
+# config.ini
