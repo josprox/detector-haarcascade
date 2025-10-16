@@ -1,12 +1,23 @@
 # model.py
 import os
+import sys # <--- IMPORTANTE: Se importa el módulo sys
 import cv2
 import numpy as np
 from PySide6.QtCore import QObject, Signal, QTimer
 
-# --- Constantes ---
-HAARCASCADE_DIR = 'haarcascade'
-IMAGES_DIR = 'imgPruebas'
+# --- Resolución dinámica de rutas para PyInstaller ---
+# Esta es la lógica clave para que funcione tanto en modo script como en .exe
+if getattr(sys, 'frozen', False):
+    # Si la aplicación está "congelada" (ejecutable), la ruta base es la carpeta temporal creada por PyInstaller
+    base_path = sys._MEIPASS
+else:
+    # Si se ejecuta como un script normal, la ruta base es el directorio del propio script
+    base_path = os.path.dirname(os.path.abspath(__file__))
+
+# --- Constantes con rutas dinámicas ---
+HAARCASCADE_DIR = os.path.join(base_path, 'haarcascade')
+IMAGES_DIR = os.path.join(base_path, 'imgPruebas')
+
 
 class DetectionModel(QObject):
     """

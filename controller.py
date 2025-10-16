@@ -1,11 +1,14 @@
 # controller.py
 import os
 from datetime import datetime
-
 import cv2
 
 # --- Constantes ---
-OUTPUT_DIR = 'Resultados'
+# MODIFICADO: Guardar los resultados en una carpeta dentro del directorio del usuario
+# Esto es más limpio y evita problemas de permisos.
+home_dir = os.path.expanduser("~")
+OUTPUT_DIR = os.path.join(home_dir, 'DetectorResultados')
+
 
 class DetectorController:
     """
@@ -86,16 +89,19 @@ class DetectorController:
         if self._processed_image is None: return
 
         os.makedirs(OUTPUT_DIR, exist_ok=True)
-        date_str = datetime.now().strftime('%d%m%y')
+        date_str = datetime.now().strftime('%d%m%y_%H%M%S')
         base_img, _ = os.path.splitext(self.view.image_combo.currentText())
         base_cas, _ = os.path.splitext(self.view.cascade_combo.currentText())
         
-        filename = f"{base_img}-{date_str}-{base_cas}.jpg"
+        filename = f"{base_img}-{base_cas}-{date_str}.jpg"
         path = os.path.join(OUTPUT_DIR, filename)
         
         # OpenCV guarda en BGR, y nuestra imagen está en ese formato.
-        cv2.imwrite(path, self._processed_image)
-        self.view.show_message("Éxito", f"Imagen guardada en:\n{path}")
+        try:
+            cv2.imwrite(path, self._processed_image)
+            self.view.show_message("Éxito", f"Imagen guardada en:\n{path}")
+        except Exception as e:
+            self.view.show_message("Error al guardar", f"No se pudo guardar la imagen:\n{e}", "critical")
 
 
     # --- Slots para señales del Modelo ---
